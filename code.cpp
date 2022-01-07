@@ -10,21 +10,47 @@
 
 int main(void)
 {
+  // Create variables of nodes and links
   std::vector<std::pair<std::string, std::string> > nodes, links;
 
+  // Read file and save data
   read_network(nodes, links);
 
-  std::cout << "Node\tColor" << std::endl;
-  for(size_t i=0; i<nodes.size(); i++){
-    std::cout << nodes[i].first << '\t' << nodes[i].second << std::endl;
+  // Create the adjacency matrix
+  int* graph = create_networks(nodes, links);
+
+
+  // Start the Depth-First-Search algorithm to get all paths between two nodes
+
+  // Variable for check the used (visited) nodes
+  bool* visited = new bool[nodes.size()]();
+
+  // Containers of the temporal path, and all paths
+  std::vector<int> current_path;
+  std::vector<std::vector<int> > paths;
+
+  // Set init and end node
+  int init = 0, end = 4;
+
+  // Find the paths
+  DepthFirstSearch_DFS(graph, init, end, nodes.size(), visited, current_path, paths);
+
+  // Print paths
+  std::cout << "Paths from " << init << " to " << end << std::endl;
+  for(size_t i=0; i<paths.size(); i++){
+    std::cout << nodes[paths[i][0]].first;
+    for(size_t j=1; j<paths[i].size(); j++){
+      std::cout << " -> " << nodes[paths[i][j]].first;
+    }
+    std::cout << std::endl;
   }
 
-  std::cout << std::endl;
 
-  std::cout << "Node1 <-> Node2" << std::endl;
-  for(size_t i=0; i<links.size(); i++){
-    std::cout << links[i].first << " <-> " << links[i].second << std::endl;
-  }
+  // Erase memory
+  delete[] graph;
+  delete[] visited;
+  nodes.clear();
+  links.clear();
 
   return 0;
 }
