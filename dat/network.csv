@@ -1,21 +1,21 @@
-Nodo	Color
-A	
-B	
-C	
-D	
-E	
-F	
-G	Verde
-H	Rojo
-I	Verde
-	
-Nodo1	Nodo2
-A	B
-B	C
-C	D
-D	E
-E	F
-C	G
-G	H
-H	I
-I	F
+Nodo,Color
+A,
+B,
+C,
+D,
+E,
+F,
+G,Verde
+H,Rojo
+I,Verde
+,
+Nodo1,Nodo2
+A,B
+B,C
+C,D
+D,E
+E,F
+C,G
+G,H
+H,I
+I,F
