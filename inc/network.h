@@ -11,10 +11,14 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include <parameters.h>
+
 #include <vector>
 #include <utility>
-#include <string>
 
+
+/// Create the variable of Parameters class
+const Parameters MyPar;
 
 /**
  * @brief This function read the CSV file where the graph is defined. Divide the nodes,
@@ -59,13 +63,12 @@ void DepthFirstSearch_DFS(int* matrix, int init, int end, size_t num_nodes, bool
  * @brief This function check the nodes in the paths can be visited by the color asked, if not
  * then remove the node from the path. Then check which path has the minimum distance.
  *
- * @param color Color of the bus used in the displacement.
  * @param paths Vector with all the possible paths.
  * @param nodes Vector with the node's label and color.
  *
  * @return Index of the minimum path in the vector @p paths
  */
-size_t min_path(std::string color, std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes);
+size_t min_path(std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes);
 
 
 #endif

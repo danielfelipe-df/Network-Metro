@@ -23,6 +23,7 @@ include_directories(${CMAKE_SOURCE_DIR}/inc)
 # Add the sources
 target_sources(Project PRIVATE
   src/network.cpp
+  src/parameters.cpp
   )
 
 # Add the flags

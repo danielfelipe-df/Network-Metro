@@ -35,13 +35,25 @@ int main(void)
   std::vector<std::vector<int> > paths;
 
   // Set init and end node
-  int init = 2, end = 5;
+  int init, end;
+  for(size_t i=0; i<nodes.size(); i++){
+    if(MyPar.init == nodes[i].first){
+      init = i;
+      break;
+    }
+  }
+  for(size_t i=0; i<nodes.size(); i++){
+    if(MyPar.end == nodes[i].first){
+      end = i;
+      break;
+    }
+  }
 
   // Find the paths
   DepthFirstSearch_DFS(graph, init, end, nodes.size(), visited, current_path, paths);
 
   // Print paths
-  std::cout << "Paths from " << init << " to " << end << std::endl;
+  std::cout << "Paths from " << MyPar.init << " to " << MyPar.end << std::endl;
   for(size_t i=0; i<paths.size(); i++){
     std::cout << nodes[paths[i][0]].first;
     for(size_t j=1; j<paths[i].size(); j++){
@@ -52,7 +64,7 @@ int main(void)
   std::cout << std::endl;
 
   // Find Min path
-  size_t min_index = min_path("NOCOLOR", paths, nodes);
+  size_t min_index = min_path(paths, nodes);
 
   // Print min path
   std::cout << "Min path index is: " << min_index << std::endl;

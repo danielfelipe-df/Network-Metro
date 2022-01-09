@@ -16,12 +16,12 @@
 
 void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
   // File to be read
-  std::string filename("dat/network.csv"), line;
+  std::string line;
 
   // Check the file was opened
-  std::ifstream file(filename);
+  std::ifstream file(MyPar.filename);
   if(!file.is_open()){
-    std::cerr << "Could not open the file '" << filename << "'" << std::endl;
+    std::cerr << "Could not open the file '" << MyPar.filename << "'" << std::endl;
   }
 
   // Variable to save the data
@@ -156,15 +156,15 @@ void DepthFirstSearch_DFS(int* matrix, int init, int end, size_t num_nodes, bool
 }
 
 
-size_t min_path(std::string color, std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes){
+size_t min_path(std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes){
 
   // Container of nodes 'color' ommit
   std::vector<int> no_nodes;
 
   // If 'color' is different to nocolor, collect prohibited nodes
-  if(color != "NOCOLOR"){
+  if(MyPar.color != "NOCOLOR"){
     for(size_t i=0; i<nodes.size(); i++){
-      if(nodes[i].second != "NOCOLOR" && nodes[i].second != color)
+      if(nodes[i].second != "NOCOLOR" && nodes[i].second != MyPar.color)
 	no_nodes.push_back(i);
     }
   }
