@@ -2,14 +2,17 @@
  * @file network.cpp
  * @author Daniel Felipe
  * @date 03/01/2021
- * @brief
+ *
+ * @brief This is the source file of all functions used in this code.
  */
+
 
 #include <network.h>
 
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+
 
 void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
   // File to be read
@@ -31,7 +34,7 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
 
     // Check for the separated by a delimiter
     std::vector<std::string> newline;
-    std::string::size_type found = line.find("\t");
+    std::string::size_type found = line.find(",");
 
     // Loop 'till the last delimiter
     while(found != std::string::npos){
@@ -41,7 +44,7 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
       line.erase(0, found+1);
 
       // Check for the next delimiter
-      found = line.find("\t");
+      found = line.find(",");
     }
 
     // Save the last string
@@ -150,4 +153,40 @@ void DepthFirstSearch_DFS(int* matrix, int init, int end, size_t num_nodes, bool
   // If the path ended, but it wasn't in the 'end' node, then turn back
   visited[init] = false;
   current_path.pop_back();
+}
+
+
+size_t min_path(std::string color, std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes){
+
+  // Container of nodes 'color' ommit
+  std::vector<int> no_nodes;
+
+  // If 'color' is different to nocolor, collect prohibited nodes
+  if(color != "NOCOLOR"){
+    for(size_t i=0; i<nodes.size(); i++){
+      if(nodes[i].second != "NOCOLOR" && nodes[i].second != color)
+	no_nodes.push_back(i);
+    }
+  }
+
+  // Variables to find the min path
+  size_t index = 0, min = SIZE_MAX;
+
+  // Loop over the paths to delete nodes in 'no_nodes'
+  for(size_t i=0; i<paths.size(); i++){
+
+    // Loop over each item in the path to check if there is a prohibited node
+    for(size_t j=0; j<paths[i].size(); j++){
+      if(std::find(no_nodes.begin(), no_nodes.end(), paths[i][j]) != no_nodes.end()){
+	paths[i].erase(paths[i].begin() + j);
+	j--;
+      }
+    }
+
+    // Save the value and index if is minimum
+    index = ((min > paths[i].size()) ? i : index);
+    min = ((min > paths[i].size()) ? paths[i].size() : min);
+  }
+
+  return index;
 }
