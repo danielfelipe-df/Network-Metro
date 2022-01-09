@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set the project name
-project(Tarea_Buda.com
+project(Network-Metro
   VERSION 1.0
   DESCRIPTION "Minimum distance in a metro network"
   LANGUAGES CXX C
