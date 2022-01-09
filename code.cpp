@@ -36,8 +36,8 @@ int main(void)
     std::cerr << "Please check the format used." << std::endl;
     return EXIT_FAILURE;
   }
-  
-  
+
+
   // Set init and end node
   int init=-1, end=-1;
   for(size_t i=0; i<nodes.size(); i++){
@@ -45,7 +45,7 @@ int main(void)
       init = i;
       break;
     }
-  }  
+  }
   for(size_t i=0; i<nodes.size(); i++){
     if(MyPar.end == nodes[i].first){
       end = i;
