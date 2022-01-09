@@ -6,6 +6,21 @@ This code get us the minimum path for a bus displacement in a Metro network. The
 
 
 
+## Documentation
+
+---
+
+The documentation was made with Doxygen. It is not necessary to install the tool, but it is better in order to see it better. To open the files and check the comments is enough.
+
+If Doxygen was installed then execute the commands to check it in the browser
+
+```bash
+doxygen
+browser doc/html/index.html
+```
+
+
+
 ## Data file
 
 ---
@@ -27,8 +42,6 @@ The data file is located in the `dat` folder, and it's name is `network.csv` (Th
 | ...       | ...       |
 
 The graph is undirected, so is not neccesary to write to times the same edge. The color is not a mandatory value. If it is not define, then the default value is "NOCOLOR".
-
-
 
 ## Execution process
 
