@@ -22,6 +22,7 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
   std::ifstream file(MyPar.filename);
   if(!file.is_open()){
     std::cerr << "Could not open the file '" << MyPar.filename << "'" << std::endl;
+    return;
   }
 
   // Variable to save the data
