@@ -4,8 +4,6 @@
 
 This code get us the minimum path for a bus displacement in a Metro network. The buses and nodes can be of different colors, then the bus can or not stop in one station (node) or not.
 
-
-
 ## Documentation
 
 ---
@@ -19,29 +17,27 @@ doxygen
 browser doc/html/index.html
 ```
 
-
-
 ## Data file
 
 ---
 
-The data file is located in the `dat` folder, and it's name is `network.csv` (The other files are test data files. Don't modify). This is a CSV file with comma (,) delimiter. The structure of the file consists of tow parts. The first part is the node with its attribute (color), and the second one the edges. So the structure, if wanted to be modify, must keep:
+The data file is located in the `dat` folder, and it's name is `network.csv` (The other files are test data files. Don't modify). This is a CSV file with comma (,) delimiter. The structure of the file consists of two parts. The first part is the node with its attributes (color and time), and the second one the edges. So the structure, if wanted to be modify, must keep:
 
-| **Nodo**  | **Color** |
-| --------- | --------- |
-| Node1     | Color1    |
-| Node2     |           |
-| Node3     | Color2    |
-| Node4     | Color1    |
-| ...       | ...       |
-|           |           |
-| **Nodo1** | **Nodo2** |
-| Node1     | Node2     |
-| Node1     | Node3     |
-| Node4     | Node3     |
-| ...       | ...       |
+| **Nodo**  | **Color** | **Time** |
+| --------- | --------- | -------- |
+| Node1     | Color1    | Time1    |
+| Node2     |           | Time2    |
+| Node3     | Color2    |          |
+| Node4     | Color1    | Time3    |
+| ...       | ...       | ...      |
+|           |           |          |
+| **Nodo1** | **Nodo2** |          |
+| Node1     | Node2     |          |
+| Node1     | Node3     |          |
+| Node4     | Node3     |          |
+| ...       | ...       |          |
 
-The graph is undirected, so is not neccesary to write to times the same edge. The color is not a mandatory value. If it is not define, then the default value is "NOCOLOR".
+The graph is undirected, so is not neccesary to write to times the same edge. The color is not a mandatory value. If **Color** is not defined, then the default value is "NOCOLOR". If **Time** is not defined, then the default value is "1".
 
 ## Execution process
 
