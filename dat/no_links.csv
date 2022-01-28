@@ -1,8 +1,8 @@
-Nodo,Color
-A,
-B,
-C,
-G,Verde
-H,Rojo
-,
-Nodo1,Nodo2
+Nodo,Color,Time
+A,,
+B,,
+C,,
+G,Verde,
+H,Rojo,
+,,
+Nodo1,Nodo2,
