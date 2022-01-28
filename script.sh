@@ -34,6 +34,7 @@ if [ "${tests^^}" == "YES" ]; then
    bash script.sh -f ../dat/bad_network.csv -i A -e F -c NOCOLOR
    bash script.sh -f ../dat/no_nodes.csv -i A -e F -c NOCOLOR
    bash script.sh -f ../dat/no_links.csv -i A -e F -c NOCOLOR
+   bash script.sh -f ../dat/network.csv -i A -e F -c ROJO
    exit 0
 fi
 
