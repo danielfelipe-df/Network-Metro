@@ -28,7 +28,7 @@ const Parameters MyPar;
  * second one is the color.
  * @param links Is a vector of pairs. Both elements are nodes that are connected by an edge.
  */
-void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links);
+void read_network(std::vector<std::vector<std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links);
 
 
 /**
@@ -39,7 +39,7 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
  *
  * @return 1-D array containing 1 and 0. 1 if there is an edge, 0 otherwise.
  */
-int* create_networks(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links);
+int* create_networks(std::vector<std::vector<std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links);
 
 
 /**
@@ -61,14 +61,12 @@ void DepthFirstSearch_DFS(int* matrix, int init, int end, size_t num_nodes, bool
 
 /**
  * @brief This function check the nodes in the paths can be visited by the color asked, if not
- * then remove the node from the path. Then check which path has the minimum distance.
+ * then remove the node from the path.
  *
  * @param paths Vector with all the possible paths.
  * @param nodes Vector with the node's label and color.
- *
- * @return Index of the minimum path in the vector @p paths
  */
-size_t min_path(std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes);
+void modify_paths(std::vector<std::vector<int> > &paths, std::vector<std::vector<std::string> > &nodes);
 
 
 #endif

@@ -14,7 +14,7 @@
 #include <algorithm>
 
 
-void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
+void read_network(std::vector<std::vector<std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
   // File to be read
   std::string line;
 
@@ -63,14 +63,24 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
   // Check the line is not void
   while(data[i][0].length() != 0){
 
-    // Save the node name and color
+    std::string aux_color = "NOCOLOR", aux_time = "1";
+
+    // Check the color is given
     if(data[i][1].length() != 0){
-      nodes.push_back(std::make_pair(data[i][0], data[i][1]));
+      aux_color = data[i][1];
     }
-    // If there is not color, set it as 'NOCOLOR'
-    else{
-      nodes.push_back(std::make_pair(data[i][0], "NOCOLOR"));
+
+    // Save the time name and color
+    if(data[i][2].length() != 0){
+      aux_time = data[i][2];
     }
+
+
+    std::vector<std::string> aux_vec;
+    aux_vec.push_back(data[i][0]);
+    aux_vec.push_back(aux_color);
+    aux_vec.push_back(aux_time);
+    nodes.push_back(aux_vec);
 
     // Continue to next line
     i++;
@@ -89,7 +99,7 @@ void read_network(std::vector<std::pair<std::string, std::string> > &nodes, std:
 }
 
 
-int* create_networks(std::vector<std::pair<std::string, std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
+int* create_networks(std::vector<std::vector<std::string> > &nodes, std::vector<std::pair<std::string, std::string> > &links){
   // Create the adjacency matrix
   int* matrix = new int[nodes.size()*nodes.size()]();
 
@@ -99,13 +109,13 @@ int* create_networks(std::vector<std::pair<std::string, std::string> > &nodes, s
 
     // Get the index of first node
     for(j=0; j<nodes.size(); j++){
-      if(links[i].first == nodes[j].first)
+      if(links[i].first == nodes[j][0])
 	break;
     }
 
     // Get the index of second node
     for(k=0; k<nodes.size(); k++){
-      if(links[i].second == nodes[k].first)
+      if(links[i].second == nodes[k][0])
 	break;
     }
 
@@ -157,7 +167,7 @@ void DepthFirstSearch_DFS(int* matrix, int init, int end, size_t num_nodes, bool
 }
 
 
-size_t min_path(std::vector<std::vector<int> > &paths, std::vector<std::pair<std::string, std::string> > &nodes){
+void modify_paths(std::vector<std::vector<int> > &paths, std::vector<std::vector<std::string> > &nodes){
 
   // Container of nodes 'color' ommit
   std::vector<int> no_nodes;
@@ -165,29 +175,22 @@ size_t min_path(std::vector<std::vector<int> > &paths, std::vector<std::pair<std
   // If 'color' is different to nocolor, collect prohibited nodes
   if(MyPar.color != "NOCOLOR"){
     for(size_t i=0; i<nodes.size(); i++){
-      if(nodes[i].second != "NOCOLOR" && nodes[i].second != MyPar.color)
+      if(nodes[i][1] != "NOCOLOR" && nodes[i][1] != MyPar.color)
 	no_nodes.push_back(i);
     }
   }
-
-  // Variables to find the min path
-  size_t index = 0, min = SIZE_MAX;
 
   // Loop over the paths to delete nodes in 'no_nodes'
   for(size_t i=0; i<paths.size(); i++){
 
     // Loop over each item in the path to check if there is a prohibited node
     for(size_t j=0; j<paths[i].size(); j++){
+
+      // If a node without the appropiate color is in the path, erase it
       if(std::find(no_nodes.begin(), no_nodes.end(), paths[i][j]) != no_nodes.end()){
 	paths[i].erase(paths[i].begin() + j);
 	j--;
       }
     }
-
-    // Save the value and index if is minimum
-    index = ((min > paths[i].size()) ? i : index);
-    min = ((min > paths[i].size()) ? paths[i].size() : min);
   }
-
-  return index;
 }
